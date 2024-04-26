@@ -8,21 +8,20 @@ public record RequestLog(PathString path, string? name, int? statusCode, double 
 
 public class Mapper
 {
-    public static UserDto ToDto(User user) => new UserDto
+    public static UserDto ToDto(User user) => new()
     {
         Id = user.Id,
         Email = user.Email
     };
 
-
-    public static CompanyDto ToDto(Company company) => new CompanyDto
+    public static CompanyDto ToDto(Company company) => new 
     (
         Name: company.Email,
         Id: company.Id,
         Users: company.Users.Select(ToDto).ToList()
     );
 
-    public static ContractDto ToDto(Project project) => new ContractDto
+    public static ProjectDto ToDto(Project project) => new ProjectDto
     (
         Id: project.Id,
         ClientCompany: ToDto(project.ClientCompany),
@@ -33,7 +32,7 @@ public class Mapper
 
 }
 
-public record ContractDto
+public record ProjectDto
 (
     Guid Id,
     CompanyDto ClientCompany,
@@ -52,3 +51,14 @@ public class UserDto
     public Guid Id { get; set; }
     public string Email { get; set; } = string.Empty;
 }
+
+
+public record GetProjecsListResponse
+(
+    int TotalCount,
+    int PageNumber,
+    int PageSize,
+    bool HasPreviousPage,
+    bool HasNextPage,
+    List<ProjectDto> Projects
+);
