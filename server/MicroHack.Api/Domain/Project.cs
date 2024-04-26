@@ -9,6 +9,7 @@ public class Project
     public Company ProviderCompany { get; private init; } = null!;
     public  ProjectStatus Status { get; private set; } = ProjectStatus.Pending;
     public string Content { get; private set; } = string.Empty;
+    public List<Task> Tasks { get; private set; } = [];
 
     public Project(Company clientCompany, Company providerCompany, string content)
     {

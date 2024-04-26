@@ -62,7 +62,7 @@ public class ProjectFeatures(AppDbContext db) : ControllerBase
                 .Take(PageSize.Value);
 
         // I can use Mapper.ToDto here because select one of the functions that realy execute the code, then perform the mapping
-        var usersResult = await projects
+        var usersResult = await projects.Include(p=>p.Tasks)
             .Select(u => Mapper.ToDto(u))
             .ToListAsync();
 

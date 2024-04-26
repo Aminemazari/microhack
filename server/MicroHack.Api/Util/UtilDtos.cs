@@ -27,10 +27,25 @@ public class Mapper
         ClientCompany: ToDto(project.ClientCompany),
         ProviderCompany: ToDto(project.ProviderCompany),
         Content: project.Content,
-        Status: project.Status.ToString()
+        Status: project.Status.ToString(),
+        Tasks: project.Tasks.Select(ToDto).ToList()
+    );
+
+    public static TaskDto ToDto(Domain.Task task) => new TaskDto
+    (
+        Id: task.Id,
+        Content: task.Content,
+        ProjectId: task.Project.Id
     );
 
 }
+
+public record TaskDto
+(
+    Guid Id,
+    string Content,
+    Guid ProjectId
+);
 
 public record ProjectDto
 (
@@ -38,7 +53,8 @@ public record ProjectDto
     CompanyDto ClientCompany,
     CompanyDto ProviderCompany,
     string Content,
-    string Status
+    string Status,
+    List<TaskDto> Tasks
 );
 
 public record CompanyDto(
