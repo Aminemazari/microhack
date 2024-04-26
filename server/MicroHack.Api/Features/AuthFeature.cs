@@ -65,9 +65,10 @@ public class AuthFeature(AppDbContext db) : ControllerBase
 
         var token = JwtService.GenerateJWTToken(user);
 
-        return Ok(new {Token = token});
+        return Ok(new TokenDto(token));
     }
 
+    public record TokenDto(string Token);
     public record RegisterDto(string Email, string Password);
     public record LoginDto(string Email, string Password);
 

@@ -8,7 +8,7 @@ namespace MicroHack.Util;
 
 public static class JwtService
 {
-    private static string jwtSecret = "DefaultSecuretoken";
+    private static string jwtSecret = "dummy_secret_for_development_mode";
 
     public static void SetJwtSecret(string jwtSecret)
     {
@@ -18,7 +18,7 @@ public static class JwtService
     public static string GenerateJWTToken(User user) {
 
         var claims = new List<Claim> {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
         };
         var jwtToken = new JwtSecurityToken(
             claims: claims,
@@ -26,8 +26,7 @@ public static class JwtService
             expires: DateTime.UtcNow.AddDays(30),
             signingCredentials: new SigningCredentials(
                 new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtSecret)
-                    ),
+                Encoding.UTF8.GetBytes(jwtSecret)),
                 "HS256")
             );
         return new JwtSecurityTokenHandler().WriteToken(jwtToken);
