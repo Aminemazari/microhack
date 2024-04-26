@@ -1,11 +1,15 @@
 import React from "react"
-import { ScheduleComponent } from "@syncfusion/ej2-react-schedule"
+import NavigationBar from "./componenet/navigationBar"
+import TaskesBar from "./componenet/taskesBar.jsx"
+import pics from "./assets/hour.svg"
+import SearchBar from "./componenet/searchBar.jsx"
+import HomePage from "./HomePage/homePage.jsx"
 function App() {
 
  return (
-    <>
-     <ScheduleComponent/>
-    </>
+    <div>
+    <HomePage/>
+    </div>
   )
 }
 
