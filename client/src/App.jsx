@@ -1,18 +1,17 @@
-import React from "react"
-import NavigationBar from "./componenet/navigationBar"
-import TaskesBar from "./componenet/taskesBar.jsx"
-import pics from "./assets/hour.svg"
-import SearchBar from "./componenet/searchBar.jsx"
-import HomePage from "./HomePage/homePage.jsx"
-import Card from "./componenet/Card.jsx"
-import Cards from "./componenet/Cards.jsx"
-function App() {
 
- return (
-    <div>
-    <Cards/>
-    </div>
-  )
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginSignup from "./pages/LoginSignup";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<LoginSignup />} />
+
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App; 
