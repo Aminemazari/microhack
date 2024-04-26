@@ -22,14 +22,34 @@ public class Mapper
     {
         return new CompanyDto
         (
-            Name : company.Name,
+            Name : company.Email,
             Id : company.Id,
             Users : company.Users.Select(ToDto).ToList()
         );
     }
 
+    public static ContractDto ToDto(Contract user)
+    {
+        return new ContractDto
+        (
+            Id : user.Id,
+            ClientCompany : ToDto(user.ClientCompany),
+            ProviderCompany : ToDto(user.ProviderCompany),
+            Content : user.Content,
+            IsAccepted : user.IsAccepted
+        );
+    }
 
 }
+
+public record ContractDto
+(
+    Guid Id,
+    CompanyDto ClientCompany,
+    CompanyDto ProviderCompany,
+    string Content,
+    bool? IsAccepted
+);
 
 public record CompanyDto(
     Guid Id,

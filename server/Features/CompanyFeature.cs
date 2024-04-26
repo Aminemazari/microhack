@@ -11,14 +11,14 @@ namespace MicroHack.Features;
 [ApiController]
 [Tags("Company Group")]
 [Route("api/company")]
-public class CompanyFeature(AppDbContext db,CompanyManager companyManager) : ControllerBase
+public class CompanyFeature(AppDbContext Db) : ControllerBase
 {
-    private readonly AppDbContext Db = db;
-    private readonly CompanyManager CompanyManager = companyManager;
+    private readonly AppDbContext Db = Db;
+    private readonly CompanyManager CompanyManager = new CompanyManager(Db);
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Error))]
-    public async Task<IActionResult> GetCompanyData(Guid id)
+    public async Task<IActionResult> GetCompanyFeatureData(Guid id)
     {
         var company = await Db.Companies
             .Include(c => c.Users)
@@ -26,7 +26,7 @@ public class CompanyFeature(AppDbContext db,CompanyManager companyManager) : Con
             
         if (company is null)
         {
-            return NotFound(new Error("Company Not Found"));
+            return NotFound(new Error("CompanyFeature Not Found"));
         }
 
         return Ok(Mapper.ToDto(company));
@@ -36,25 +36,25 @@ public class CompanyFeature(AppDbContext db,CompanyManager companyManager) : Con
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Error))]
-    public async Task<IActionResult> CreateCompany(CompanyCreateDto companyDto)
+    public async Task<IActionResult> CreateCompanyFeature(CompanyFeatureCreateDto companyDto)
     {
-        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
         var user = await Db.Users.FirstOrDefaultAsync(u=>u.Id == userId);
 
         if(user is null) return NotFound(new Error("User Not Found"));
 
-        if (string.IsNullOrEmpty(companyDto.Name))
+        if (string.IsNullOrEmpty(companyDto.Email))
         {
             return BadRequest(new Error("Invalid company Name"));
         }
 
-        if (Db.Companies.Any(c => c.Name == companyDto.Name))
+        if (Db.Companies.Any(c => c.Email == companyDto.Email))
         {
-            return BadRequest(new Error("Company already exists"));
+            return BadRequest(new Error("CompanyFeature already exists"));
         }
         
-        var company = Db.Companies.Add(new Company(companyDto.Name)).Entity;
+        var company = Db.Companies.Add(new Company(companyDto.Email)).Entity;
         company.Users.Add(user);
 
         await Db.SaveChangesAsync();
@@ -73,7 +73,7 @@ public class CompanyFeature(AppDbContext db,CompanyManager companyManager) : Con
     [HttpPost("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Error))]
-    public async Task<IActionResult> AddUserToCompany(Guid id, [Required][FromQuery] Guid userId)
+    public async Task<IActionResult> AddUserToCompanyFeature(Guid id, [Required][FromQuery] Guid userId)
     {
         var company = await Db.Companies
             .Include(c => c.Users)
@@ -81,19 +81,19 @@ public class CompanyFeature(AppDbContext db,CompanyManager companyManager) : Con
             
         if (company is null)
         {
-            return NotFound(new Error("Company Not Found"));
+            return NotFound(new Error("CompanyFeature Not Found"));
         }
 
         if(company.Users.Any(u=>u.Id == userId))
         {
-            return BadRequest(new Error("User Already in Company"));
+            return BadRequest(new Error("User Already in CompanyFeature"));
         }
         
         await CompanyManager.AddUserToCompany(id, userId);
 
-        await db.SaveChangesAsync();
+        await Db.SaveChangesAsync();
 
         return Ok(Mapper.ToDto(company));
     }
-    public record CompanyCreateDto(string Name);
+    public record CompanyFeatureCreateDto(string Email);
 }
