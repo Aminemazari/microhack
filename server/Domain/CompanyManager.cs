@@ -19,6 +19,8 @@ public class CompanyManager(AppDbContext db)
 
         company.Users.Add(user);
         user.Company = company;
+
+        await Db.SaveChangesAsync();
         return true;
     }
 

@@ -1,5 +1,6 @@
 using System.Text;
 using MicroHack;
+using MicroHack.Domain;
 using MicroHack.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +36,7 @@ builder.Services.AddAuthentication(cfg => {
 });
 
 builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddScoped<CompanyManager>();
 
 JwtService.SetJwtSecret(builder.Configuration["ApplicationSettings:JWT_Secret"]!);
 

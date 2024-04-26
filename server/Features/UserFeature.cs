@@ -1,5 +1,7 @@
+using System.Security.Claims;
 using MicroHack.Domain;
 using MicroHack.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,12 +28,14 @@ public class UserFeature(AppDbContext db) : ControllerBase
         return Ok(Mapper.ToDto(user));
     }
 
-    [HttpPut("{id}")]
+    [Authorize]
+    [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Error))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Error))]
-    public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserUpdateDto userDto)
+    public async Task<IActionResult> UpdateUser([FromBody] UserUpdateDto userDto)
     {
+        var id = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
         var existingUser = await Db.Users.FindAsync(id);
         if (existingUser is null)
         {
@@ -52,11 +56,12 @@ public class UserFeature(AppDbContext db) : ControllerBase
         return Ok(Mapper.ToDto(existingUser));
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Error))]
-    public async Task<IActionResult> DeleteUser(Guid id)
+    public async Task<IActionResult> DeleteUser()
     {
+        var id = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
         var user = await Db.Users.FindAsync(id);
         if (user is null)
         {

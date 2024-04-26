@@ -1,6 +1,8 @@
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 using MicroHack.Domain;
 using MicroHack.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,11 +32,18 @@ public class CompanyFeature(AppDbContext db,CompanyManager companyManager) : Con
         return Ok(Mapper.ToDto(company));
     }
 
+    [Authorize]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Error))]
     public async Task<IActionResult> CreateCompany(CompanyCreateDto companyDto)
     {
+        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+        var user = await Db.Users.FirstOrDefaultAsync(u=>u.Id == userId);
+
+        if(user is null) return NotFound(new Error("User Not Found"));
+
         if (string.IsNullOrEmpty(companyDto.Name))
         {
             return BadRequest(new Error("Invalid company Name"));
@@ -45,13 +54,10 @@ public class CompanyFeature(AppDbContext db,CompanyManager companyManager) : Con
             return BadRequest(new Error("Company already exists"));
         }
         
-        Db.Companies.Add(new Company(companyDto.Name));
-        
+        var company = Db.Companies.Add(new Company(companyDto.Name)).Entity;
+        company.Users.Add(user);
+
         await Db.SaveChangesAsync();
-
-        var company = await Db.Companies.Where(c=>c.Name == companyDto.Name).FirstOrDefaultAsync();
-
-        if(company is null) return BadRequest(new Error("Failed to create company"));
 
         return Ok(Mapper.ToDto(company));
     }
@@ -83,9 +89,11 @@ public class CompanyFeature(AppDbContext db,CompanyManager companyManager) : Con
             return BadRequest(new Error("User Already in Company"));
         }
         
-        CompanyManager.AddUserToCompany(company);
+        await CompanyManager.AddUserToCompany(id, userId);
 
+        await db.SaveChangesAsync();
 
+        return Ok(Mapper.ToDto(company));
     }
     public record CompanyCreateDto(string Name);
 }
