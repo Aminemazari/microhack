@@ -1,14 +1,16 @@
+using MicroHack.Util;
+
 namespace MicroHack.Domain;
 
-public class Contract
+public class Project
 {
     public Guid Id { get; private init; }
     public Company ClientCompany {get; private init;} = null!;
     public Company ProviderCompany { get; private init; } = null!;
-    public bool? IsAccepted { get; private set; } = null;
+    public  ProjectStatus Status { get; private set; } = ProjectStatus.Pending;
     public string Content { get; private set; } = string.Empty;
 
-    public Contract(Company clientCompany, Company providerCompany, string content)
+    public Project(Company clientCompany, Company providerCompany, string content)
     {
         Id = Guid.NewGuid();
         ClientCompany = clientCompany;
@@ -16,16 +18,7 @@ public class Contract
         Content = content;
     }
 
-    private Contract() {}
+    private Project() {}
 
-    public void Accept()
-    {
-        IsAccepted = true;
-    }
-
-    public void Decline()
-    {
-        IsAccepted = false;
-    }
 }
 

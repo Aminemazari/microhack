@@ -8,37 +8,28 @@ public record RequestLog(PathString path, string? name, int? statusCode, double 
 
 public class Mapper
 {
-    public static UserDto ToDto(User user)
+    public static UserDto ToDto(User user) => new UserDto
     {
-        return new UserDto
-        {
-            Id = user.Id,
-            Email = user.Email
-        };
-    }
+        Id = user.Id,
+        Email = user.Email
+    };
 
 
-    public static CompanyDto ToDto(Company company)
-    {
-        return new CompanyDto
-        (
-            Name : company.Email,
-            Id : company.Id,
-            Users : company.Users.Select(ToDto).ToList()
-        );
-    }
+    public static CompanyDto ToDto(Company company) => new CompanyDto
+    (
+        Name: company.Email,
+        Id: company.Id,
+        Users: company.Users.Select(ToDto).ToList()
+    );
 
-    public static ContractDto ToDto(Contract user)
-    {
-        return new ContractDto
-        (
-            Id : user.Id,
-            ClientCompany : ToDto(user.ClientCompany),
-            ProviderCompany : ToDto(user.ProviderCompany),
-            Content : user.Content,
-            IsAccepted : user.IsAccepted
-        );
-    }
+    public static ContractDto ToDto(Project project) => new ContractDto
+    (
+        Id: project.Id,
+        ClientCompany: ToDto(project.ClientCompany),
+        ProviderCompany: ToDto(project.ProviderCompany),
+        Content: project.Content,
+        Status: project.Status.ToString()
+    );
 
 }
 
@@ -48,7 +39,7 @@ public record ContractDto
     CompanyDto ClientCompany,
     CompanyDto ProviderCompany,
     string Content,
-    bool? IsAccepted
+    string Status
 );
 
 public record CompanyDto(
