@@ -26,7 +26,7 @@ const LoginSignup = () => {
           <button  className='px-12 py-3 rounded-3xl ml-10 border border-[#797488] text-[#682DFE] hover:text-white hover:bg-[#682DFE] transition-colors duration-300' onClick={toggleView}>Sign Up</button>
         </div>
         <div className='flex flex-col w-1/2'>
-          <h1 className='text-[#682DFE] text-2xl'>Welcome to Company!</h1>
+          <h1 className='text-[#682DFE] text-2xl '>Welcome to Company!</h1>
           <h3 className='text-[#682DFE]'>Log in to your account</h3>
         </div>
         <input type="email" className='py-4 px-4 bg-[#F0F0F0] rounded-xl w-1/2 outline-none text-black' placeholder='E-mail'/>
@@ -47,8 +47,8 @@ const LoginSignup = () => {
           <h3 className='text-white'>Already have an account ?</h3>
           <button  className='px-12 py-3 rounded-3xl border border-white text-white hover:text-[#682DFE] hover:bg-white transition-colors duration-300' onClick={toggleView}>Login</button>
         </div>
-        <div className='flex flex-col w-3/4 ml-4'>
-          <h1 className='text-white text-2xl'>Welcome to Company!</h1>
+        <div className='flex flex-col w-3/4 ml-10'>
+          <h1 className='text-white text-2xl '>Welcome to Company!</h1>
           <h3 className='text-white'>Register your account</h3>
         </div>
         <input type="email" className='py-6 px-4 rounded-xl w-3/5 flex items-center outline-none h-2 text-black mr-20'placeholder='E-mail'/>

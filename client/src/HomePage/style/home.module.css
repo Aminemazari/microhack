@@ -1,0 +1,4 @@
+.hero{
+  display: flex;
+  background: var(--M3-sys-light-surface-container, #F2EBFB);
+}
