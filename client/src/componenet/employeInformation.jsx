@@ -4,7 +4,7 @@ import done from "../assets/done.svg"
 import error from "../assets/erroe.svg"
 import inProgress from "../assets/inProgress.svg"
 const employeInformation = ({pics,username,startDate,endDate,progress,campanyName,campanyLogo}) => {
-   const progressPic= "" ; 
+   var progressPic= "" ; 
     switch (progress){
         case "done":
             progressPic=done; 
@@ -27,7 +27,7 @@ const employeInformation = ({pics,username,startDate,endDate,progress,campanyNam
         <p className={style.taskDuration}>{startDate}</p>
         <p className={style.taskDuration}>{endDate}</p>
         <img src={progressPic}/>
-        <section>
+        <section className={style.campanyinfo}>
             <img src={campanyLogo}/>
             <p className={style.campanyName} >{campanyName}</p>
         </section>
