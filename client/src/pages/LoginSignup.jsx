@@ -3,58 +3,84 @@ import React, { useState } from 'react';
 
 const LoginSignup = () => {
   const [showLogin, setShowLogin] = useState(true);
-
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMsg,setErrorMsg] = useState('');
   const toggleView = () => {
     setShowLogin(!showLogin);
+    setEmail('');
+    setPassword('');
   };
+const handlesubmit =async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      setErrorMsg('Please fill all the fields');
+      return;
+    }
+    try{
+      const response=await fetch(`${process.env.serverhost}/auth/signup`,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+        },
+        body:JSON.stringify({email,password}),
+      });
+      const data=await response.json();
+      if(data.error){
+       return setErrorMsg(data.error);
+      }
+      setLocalStorage('user',data);
+    }
+    catch(error){
+      setErrorMsg(error.message)
+    }}
+
   return (
-    <div className={`flex h-screen w-full overflow-hidden ${
-      showLogin ? 'bg-[#682DFE]  transition duration-1000 ease-in-out' : 'bg-white'
-    }`}>
+    <div className={`flex h-screen w-full overflow-hidden ${showLogin ? 'bg-[#682DFE]  transition duration-1000 ease-in-out' : 'bg-white'
+      }`}>
       <div
-        className={`flex-1 bg-[#682DFE] ${
-          showLogin ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-500 ease-in-out`}
+        className={`flex-1 bg-[#682DFE] ${showLogin ? 'translate-x-0' : '-translate-x-full'
+          } transition-transform duration-500 ease-in-out`}
       ></div>
-      <div
-        className={`bg-white gap-10 w-1/2 flex flex-col items-center rounded-l-2xl ${
-          showLogin ? 'translate-x-0' : 'translate-x-full'
-        } transition-transform duration-500 ease-in-out`}
+      <form
+        className={`bg-white gap-10 w-1/2 flex flex-col items-center rounded-l-2xl ${showLogin ? 'translate-x-0' : 'translate-x-full'
+          } transition-transform duration-500 ease-in-out`}
       >
         <div className='h-10 mt-10 flex items-center gap-8'>
           <h3 className='text-white'>Don't have an account?</h3>
-          <button  className='px-12 py-3 rounded-3xl ml-10 border border-[#797488] text-[#682DFE] hover:text-white hover:bg-[#682DFE] transition-colors duration-300' onClick={toggleView}>Sign Up</button>
+          <button className='px-12 py-3 rounded-3xl ml-10 border border-[#797488] text-[#682DFE] hover:text-white hover:bg-[#682DFE] transition-colors duration-300' onClick={toggleView}>Sign Up</button>
         </div>
         <div className='flex flex-col w-1/2'>
           <h1 className='text-[#682DFE] text-2xl '>Welcome to Company!</h1>
           <h3 className='text-[#682DFE]'>Log in to your account</h3>
         </div>
-        <input type="email" className='py-4 px-4 bg-[#F0F0F0] rounded-xl w-1/2 outline-none text-black' placeholder='E-mail'/>
-        <input type="password" className='py-4 px-4 bg-[#F0F0F0] rounded-xl w-1/2 outline-none text-black' placeholder='Password'/>
+        <input type="email" className='py-4 px-4 bg-[#F0F0F0] rounded-xl w-1/2 outline-none text-black' placeholder='E-mail' onChange={(e) => { setEmail(e.target.value) }} value={email} />
+        <input type="password" className='py-4 px-4 bg-[#F0F0F0] rounded-xl w-1/2 outline-none text-black' placeholder='Password' onChange={(e) => { setPassword(e.target.value) }} value={password} />
+        {errorMsg && <p className='text-red-500'>{errorMsg}</p>}
         <div className=' gap-4 w-full flex flex-col items-center'>
           <button className='py-4 bg-[#682DFE] text-white rounded-xl w-1/2 hover:bg-[#5A21A6] transition-colors duration-300'>Log In</button>
           <button className='py-4 bg-white text-[#682DFE] rounded-xl w-1/2 border border-[#797488] hover:text-white hover:bg-[#682DFE] hover:border hover:border-solid transition-colors duration-300'>Continue with Linkedin</button>
           <button className='py-4 bg-white text-[#682DFE] rounded-xl w-1/2 border border-[#797488] hover:text-white hover:bg-[#682DFE] hover:border hover:border-solid transition-colors duration-300'>Continue with Google</button>
         </div>
-      </div>
-      
-      <div
-        className={`bg-[#682DFE] gap-10 w-1/2 flex flex-col items-center ${
-          showLogin ? 'translate-x-full' : 'translate-x-0'
-        } transition-transform  duration-500 ease-in-out  `}
+      </form>
+
+      <form
+        className={`bg-[#682DFE] gap-10 w-1/2 flex flex-col items-center ${showLogin ? 'translate-x-full' : 'translate-x-0'
+          } transition-transform  duration-500 ease-in-out  `}
       >
         <div className='h-10 mt-10  flex items-center gap-8 '>
           <h3 className='text-white'>Already have an account ?</h3>
-          <button  className='px-12 py-3 rounded-3xl border border-white text-white hover:text-[#682DFE] hover:bg-white transition-colors duration-300' onClick={toggleView}>Login</button>
+          <button className='px-12 py-3 rounded-3xl border border-white text-white hover:text-[#682DFE] hover:bg-white transition-colors duration-300' onClick={toggleView} type='submit' onSubmit={handlesubmit}>Login</button>
         </div>
         <div className='flex flex-col w-3/4 ml-10'>
           <h1 className='text-white text-2xl '>Welcome to Company!</h1>
           <h3 className='text-white'>Register your account</h3>
         </div>
-        <input type="email" className='py-6 px-4 rounded-xl w-3/5 flex items-center outline-none h-2 text-black mr-20'placeholder='E-mail'/>
-        <input type="password" className='py-6 px-4 rounded-xl w-3/5 outline-none flex items-center h-2 text-black mr-20'placeholder='password'/>
+        <input type="email" className='py-6 px-4 rounded-xl w-3/5 flex items-center outline-none h-2 text-black mr-20' placeholder='E-mail' onChange={(e) => { setEmail(e.target.value) }} value={email} />
+        <input type="password" className='py-6 px-4 rounded-xl w-3/5 outline-none flex items-center h-2 text-black mr-20' placeholder='password' onChange={(e) => { setPassword(e.target.value) }} value={password} />
+        {errorMsg && <p className='text-red-500'>{errorMsg}</p>}
         <div className='flex flex-col gap-3 w-full items-center'>
-          <button className='py-3 bg-white text-[#682DFE]  rounded-xl w-3/5 mr-20 hover:text-white hover:bg-[#682DFE] hover:border hover:border-white hover:border-solid transition-colors duration-300'> Sign Up</button>
+          <button className='py-3 bg-white text-[#682DFE]  rounded-xl w-3/5 mr-20 hover:text-white hover:bg-[#682DFE] hover:border hover:border-white hover:border-solid transition-colors duration-300' type='submit' onSubmit={handlesubmit}> Sign Up</button>
           <button className='py-3  w-3/5 border border-white rounded-xl flex justify-center items-center mr-20 hover:text-[#682DFE] hover:bg-white transition-colors duration-300'>
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="45" height="30" viewBox="0 0 48 48">
               <path fill="#0288D1" d="M42,37c0,2.762-2.238,5-5,5H11c-2.761,0-5-2.238-5-5V11c0-2.762,2.239-5,5-5h26c2.762,0,5,2.238,5,5V37z"></path>
@@ -72,7 +98,7 @@ const LoginSignup = () => {
             Continue with Google
           </button>
         </div>
-      </div>
+      </form>
       <div className={`bg-white rounded-r-2xl flex-grow  h-full ${showLogin ? 'hidden' : ''}`}></div>
     </div>
   );
