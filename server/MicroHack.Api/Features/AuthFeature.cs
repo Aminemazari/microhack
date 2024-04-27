@@ -55,20 +55,26 @@ public class AuthFeature(AppDbContext db) : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Error))]
     public IActionResult Login(LoginDto loginDto)
     {
-        var user = db.Users.FirstOrDefault(u => u.Email == loginDto.Email);
+        var user = db.Users.Include(u=>u.Company).FirstOrDefault(u => u.Email == loginDto.Email);
 
         if (user is null)
+        {
+            System.Console.WriteLine("-----------> User Not Found");
             return NotFound(new Error("User Not Found"));
         
-        if(!user.VerifyPassword(loginDto.Password))
+        }
+        if(! user.VerifyPassword(loginDto.Password))
+        {
+            System.Console.WriteLine("-----------> Wrong Password");
             return BadRequest(new Error("Failed to login"));
 
+        }
         var token = JwtService.GenerateJWTToken(user);
 
-        return Ok(new TokenDto(token));
+        return Ok(new TokenDto(token, Mapper.ToDto(user)));
     }
 
-    public record TokenDto(string Token);
+    public record TokenDto(string Token, UserDto User);
     public record RegisterDto(string Email, string Password);
     public record LoginDto(string Email, string Password);
 

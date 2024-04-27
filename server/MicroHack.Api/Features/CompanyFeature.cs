@@ -32,6 +32,19 @@ public class CompanyFeature(AppDbContext Db) : ControllerBase
         return Ok(Mapper.ToDto(company));
     }
 
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyDto))]
+    [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Error))]
+    public async Task<IActionResult> GetCompanies(Guid id)
+    {
+        var companies = Db.Companies
+            .Include(c => c.Users)
+            .Select(c=> Mapper.ToDto(c));
+
+        return Ok(companies);
+    }
+
+
     [Authorize]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyDto))]
@@ -51,7 +64,7 @@ public class CompanyFeature(AppDbContext Db) : ControllerBase
 
         if (Db.Companies.Any(c => c.Email == companyDto.Email))
         {
-            return BadRequest(new Error("CompanyFeature already exists"));
+            return BadRequest(new Error("Company already exists"));
         }
         
         var company = Db.Companies.Add(new Company(companyDto.Email)).Entity;
