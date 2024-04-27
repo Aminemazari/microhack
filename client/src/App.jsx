@@ -6,11 +6,11 @@ import LoginSignup from "./pages/LoginSignup";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={<LoginSignup />} />
+    <Routes>
+      <Route path="/login" element={<LoginSignup />} />
 
-      </Routes>
-    </BrowserRouter>
+    </Routes>
+  </BrowserRouter>
   );
 }
 
