@@ -24,7 +24,14 @@ import  uc from "../assets/uc.svg"
 import logoo from "../assets/Primery LOGO2.svg"
 import allthelogo from "../assets/allthelogo.svg"
 import IaCard from "../componenet/iaCard.jsx"
+import { useNavigate } from 'react-router-dom';
 const projectsPage = ({cliked}) => {
+  const Navigare =useNavigate("");
+
+  const handelClick=()=>{
+      Navigate() 
+  }
+  
   return (
     <div className={`${style.hero} ${!cliked ? style.not_display: ''}`}>
          <section className={styles.firstCountainer}>
@@ -57,7 +64,7 @@ const projectsPage = ({cliked}) => {
          </nav>
          <p className={style.projects}>Projects</p>
          <section className={style.projectsList}>
-        <IaCard projectTitle={"Project title"} campanyName={"Company name"} campanyPics={logo}   title={"lOREM ISPUM DOLLOR SIT"} status={"pending"}/>
+      <IaCard projectTitle={"HydroEnergetics"} campanyName={"Company name"} campanyPics={logo}   title={"hydraulic systems  "} status={"pending"} onclickGenerate={handelClick}/>
      <IaCard projectTitle={"Project title"} campanyName={"Company name"} campanyPics={logo}   title={"lOREM ISPUM DOLLOR SIT"} status={"inprogress"}/>
      <IaCard projectTitle={"Project title"} campanyName={"Company name"} campanyPics={logo}   title={"lOREM ISPUM DOLLOR SIT"} status={"done"}/>
      <IaCard projectTitle={"Project title"} campanyName={"Company name"} campanyPics={logo}   title={"lOREM ISPUM DOLLOR SIT"} status={"discard"}/>

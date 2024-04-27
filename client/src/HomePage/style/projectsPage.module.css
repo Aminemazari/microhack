@@ -109,5 +109,5 @@ letter-spacing: 0.1px;
   -webkit-scrollbar: none;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  height: 400px;
+  height: 100vh;
 }

@@ -149,7 +149,7 @@ background: var(--M3-sys-light-surface, #F9F9F9);
     -webkit-scrollbar: none;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    height: 320px;
+    height: 100vh;
 
 }
 

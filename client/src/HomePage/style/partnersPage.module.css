@@ -1,0 +1,43 @@
+.listPartners{
+    display: flex;
+    width: 95%;
+    height: 100vh;
+    padding: 16px 48px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: var(--M3-sys-light-surface-container-lowest, #FFF);
+}
+.form{
+    display: flex;
+   height: 60px;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+    border-bottom: 1px solid var(--M3-sys-light-outline-variant, #C1C9BE);
+    background: var(--M3-sys-light-on-primary, #FFF);
+}
+.company{
+    color: var(--M3-sys-light-on-primary-fixed, #1E0060);
+    width: 200px;
+    height: 20px;
+    /* M3/label/large */
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.1px;
+}
+.data{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    overflow: auto;  
+    -webkit-scrollbar: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: 100vh;
+}
