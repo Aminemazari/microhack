@@ -6,7 +6,7 @@ import IaCard from '../componenet/iaCard'
 import campanylog from "../assets/campanylogo.svg"
 import ProjectsPage from "./projectsPage"
 import PartnersPage from './partnersPage'
-const homePage = () => {
+const HomePage = () => {
   const [dashboardClick,setDashboardCliked]=useState(false);
   const [singoutClick,setSingoutclicked]=useState(false);
   const [individualClick,setIndividualclicked]=useState(false);
@@ -96,4 +96,4 @@ const homePage = () => {
   )
 }
 
-export default homePage
+export default HomePage
