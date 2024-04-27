@@ -2,6 +2,8 @@ import React,{useState} from 'react'
 import NavigationBar from '../componenet/navigationBar'
 import style from "./style/home.module.css"
 import Dashboard from './dashboard'
+import IaCard from '../componenet/iaCard'
+import campanylog from "../assets/campanylogo.svg"
 const homePage = () => {
   const [dashboardClick,setDashboardCliked]=useState(true);
   const [singoutClick,setSingoutclicked]=useState(false);
@@ -80,7 +82,9 @@ const homePage = () => {
   return (
     <div className={style.hero}>
      <NavigationBar dashboardCliked={dashboardClick} singoutonclick={handleSingoutonclick} singoutclicked={singoutClick} individualclicked={individualClick} groupclicked={groupClick} documentationclicked={documentationClick} statistiqueclicked={statistiqueClick} parameterclicked={parameterClick} dashboardonclick={handleDashboardonclick} individualonclick={handleIndividualonclick} documentationonclick ={handleDocumentationonclic} grouponclick={handleGrouponclick} statistiqueonclick={handleStatistiqueonclick} parameteronclick={handleParameteronclick} /> 
-     <Dashboard/>
+  <Dashboard cliked={dashboardClick}/>
+
+    
     </div>
   )
 }

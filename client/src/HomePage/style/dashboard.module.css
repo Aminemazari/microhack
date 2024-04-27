@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   transition: all 500ms ease;
+background: var(--M3-sys-light-surface, #F9F9F9);
 }
 .not_display{
     width: 0px;
@@ -132,7 +133,7 @@
     align-items: center;
     height: 60px;
     width: 100%;
-    background: var(--M3-sys-light-primary-fixed, #E7DEFF);
+    background: var(--M3-sys-light-surface-bright, #F7FBF2);
     border-radius: 16px;
 }
 .employerCardes{

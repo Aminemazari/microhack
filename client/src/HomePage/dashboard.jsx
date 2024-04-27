@@ -20,15 +20,17 @@ import photo from "../assets/female.svg"
 import logo from "../assets/campanylogo.svg"
 import photo1 from "../assets/10.png"
 import  uc from "../assets/uc.svg"
+import logoo from "../assets/Primery LOGO2.svg"
+import allthelogo from "../assets/allthelogo.svg"
 
 const dashboard = ({cliked}) => {
   const [value, setValue] = React.useState(dayjs('2024-04-27'));
 
   return (
-    <div className={`${style.dashboard} ${!cliked ? style.not_display: ''}`}>
+    <div className={`${style.hero} ${!cliked ? style.not_display: ''}`}>
       
       <section className={style.firstCountainer}>
-        <p className={style.dashboard}>Dashboard</p>
+        <img src={logoo} className={style.logooImage}></img>
         <div className={style.barCountainer}>
           <img src={bar}></img>
           <TaskesBar taskStatus={"Task Queue"} taskTache={154}/>
@@ -42,7 +44,7 @@ const dashboard = ({cliked}) => {
               <SearchBar></SearchBar>
                <mark className={style.profileNotificationAndAccess}>
                    <img src={notification}></img>
-                   <Profilecard username={"Amine Mazari "} pics={""} ></Profilecard>
+                   <img src={allthelogo}/>
                </mark>
             </section>
             <section className={style.filterHeader}>
@@ -56,12 +58,12 @@ const dashboard = ({cliked}) => {
 
               <section className={style.DateField}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DateField label="Date" defaultValue={dayjs('2022-04-17')}
+                  <DateField label="Date" defaultValue={dayjs('2024-04-27')}
                     InputProps={{ style: {  width: '134px',height:"40px"} }}
                     />
                   </LocalizationProvider>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DateField label="Date" defaultValue={dayjs('2022-04-17')}
+                  <DateField label="Date" defaultValue={dayjs('2024-04-27')}
                     InputProps={{ style: {  width: '134px',height:"40px"} }}
                     />
                    </LocalizationProvider>
@@ -79,9 +81,9 @@ const dashboard = ({cliked}) => {
         <div className={style.employerCardes}>
         <EmployeInformation pics={photo} username={"Clara Chen"} startDate={"11/11/2024"} endDate={"12/12/2024"} progress={"done"} campanyName={"Bolt & Gear"} campanyLogo={logo} />
         <EmployeInformation pics={photo1} username={"Jane Doe"} startDate={"11/11/2024"} endDate={"12/12/2024"} progress={"inprogress"} campanyName={"TechWizes "} campanyLogo={uc} />
-        <EmployeInformation pics={photo} username={"Clara Chen"} startDate={"11/11/2024"} endDate={"12/12/2024"} progress={"done"} campanyName={"Bolt & Gear"} campanyLogo={logo} />
+        <EmployeInformation pics={photo} username={"Clara Chen"} startDate={"11/11/2024"} endDate={"12/12/2024"} progress={"error"} campanyName={"Bolt & Gear"} campanyLogo={logo} />
         <EmployeInformation pics={photo1} username={"Jane Doe"} startDate={"11/11/2024"} endDate={"12/12/2024"} progress={"inprogress"} campanyName={"TechWizes "} campanyLogo={uc} />
-        <EmployeInformation pics={photo} username={"Clara Chen"} startDate={"11/11/2024"} endDate={"12/12/2024"} progress={"done"} campanyName={"Bolt & Gear"} campanyLogo={logo} />
+        <EmployeInformation pics={photo} username={"Clara Chen"} startDate={"11/11/2024"} endDate={"12/12/2024"} progress={"error"} campanyName={"Bolt & Gear"} campanyLogo={logo} />
         <EmployeInformation pics={photo1} username={"Jane Doe"} startDate={"11/11/2024"} endDate={"12/12/2024"} progress={"inprogress"} campanyName={"TechWizes "} campanyLogo={uc} />
         <EmployeInformation pics={photo} username={"Clara Chen"} startDate={"11/11/2024"} endDate={"12/12/2024"} progress={"done"} campanyName={"Bolt & Gear"} campanyLogo={logo} />
         <EmployeInformation pics={photo1} username={"Jane Doe"} startDate={"11/11/2024"} endDate={"12/12/2024"} progress={"inprogress"} campanyName={"TechWizes "} campanyLogo={uc} />
