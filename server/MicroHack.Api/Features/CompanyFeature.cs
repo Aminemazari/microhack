@@ -18,7 +18,7 @@ public class CompanyFeature(AppDbContext Db) : ControllerBase
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(Error))]
-    public async Task<IActionResult> GetCompanyFeatureData(Guid id)
+    public async Task<IActionResult> GetCompany(Guid id)
     {
         var company = await Db.Companies
             .Include(c => c.Users)
@@ -36,7 +36,7 @@ public class CompanyFeature(AppDbContext Db) : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CompanyDto))]
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Error))]
-    public async Task<IActionResult> CreateCompanyFeature(CompanyFeatureCreateDto companyDto)
+    public async Task<IActionResult> CreateCompany(CompanyCreateDto companyDto)
     {
         var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
@@ -95,5 +95,5 @@ public class CompanyFeature(AppDbContext Db) : ControllerBase
 
         return Ok(Mapper.ToDto(company));
     }
-    public record CompanyFeatureCreateDto(string Email);
+    public record CompanyCreateDto(string Email);
 }
