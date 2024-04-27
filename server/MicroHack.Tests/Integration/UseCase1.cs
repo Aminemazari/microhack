@@ -20,6 +20,8 @@ public partial class FullStoiesTests
         // Act
         var response1 = await client.PostAsJsonAsync("api/auth/register", registerDto1);
 
+        System.Console.WriteLine("response1 : " + response1);
+
         Assert.True(response1.IsSuccessStatusCode);
 
 

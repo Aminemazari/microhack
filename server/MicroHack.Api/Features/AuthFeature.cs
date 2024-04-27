@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using MicroHack.Domain;
 using MicroHack.Util;
@@ -55,21 +56,23 @@ public class AuthFeature(AppDbContext db) : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(Error))]
     public IActionResult Login(LoginDto loginDto)
     {
-        var user = db.Users.FirstOrDefault(u => u.Email == loginDto.Email);
+        var user = db.Users.Include(u=>u.Company).FirstOrDefault(u => u.Email == loginDto.Email);
 
         if (user is null)
+        {
             return NotFound(new Error("User Not Found"));
-        
-        if(!user.VerifyPassword(loginDto.Password))
+        }
+        if(! user.VerifyPassword(loginDto.Password))
+        {
             return BadRequest(new Error("Failed to login"));
-
+        }
         var token = JwtService.GenerateJWTToken(user);
 
-        return Ok(new TokenDto(token));
+        return Ok(new TokenDto(token, Mapper.ToDto(user)));
     }
 
-    public record TokenDto(string Token);
-    public record RegisterDto(string Email, string Password);
-    public record LoginDto(string Email, string Password);
+    public record TokenDto(string Token, UserDto User);
+    public record RegisterDto([EmailAddress] string Email,[Length(4,20)] string Password);
+    public record LoginDto([EmailAddress] string Email,[Length(4,20)] string Password);
 
 }
