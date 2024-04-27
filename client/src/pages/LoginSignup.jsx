@@ -81,7 +81,6 @@ const LoginSignup = () => {
             </svg>Continue with Google</button>
         </div>
       </div> 
-     //signup
       <div className={`bg-[#16DB65] ml-2 gap-10 w-full md:w-1/2 flex flex-col items-center ${showLogin ? 'md:translate-x-full' : 'md:translate-x-0'} transition-transform duration-500 ease-in-out`}>
         <div className='h-10 mt-10  flex items-center gap-8 '>
           <h3 className='text-white text-lg'>Already have an account ?</h3>
@@ -117,7 +116,7 @@ const LoginSignup = () => {
       <div className={`bg-white rounded-r-2xl flex-grow flex justify-center  h-full ${showLogin ? 'hidden' : ''}`}>
     
 
-      {islogged && <Navigate to="/home" />}
+      {islogged && <Navigate to="/landingPage" />}
       </div>
     </div>
   );

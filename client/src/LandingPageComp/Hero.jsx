@@ -2,6 +2,7 @@ import React from 'react'
 import Arrow from '../assets/Arrow_01.svg'
 import dashboard from '../assets/Dashboard 1.svg'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 const Hero = () => {
   return (
     <div className='bg-[#16DB65] mb-16 relative min-h-screen '>
@@ -10,9 +11,9 @@ const Hero = () => {
 <div class=" text-center text-stone-900 text-[22px] font-normal  leading-[33px]">OptiField: The All-in-One Platform for Streamlined Field Task <br /> Management.</div>
       <img src={Arrow} alt=""  className='ml-[30%] mt-[-3%] absolute'/>
       <div class=" px-5 py-3.5 bg-stone-900 rounded-[100px] shadow justify-center items-center inline-flex ml-[43.5%] mt-[3%] relative">
-    <div class="px-3 justify-center items-center flex">
+    <Link to={'/home'} class="px-3 justify-center items-center flex">
         <div class="text-center text-neutral-50 text-md font-medium  leading-tight tracking-tight">Start Your Free Trial</div>
-    </div>
+    </Link>
   
 </div>
 <motion.div

@@ -1,5 +1,6 @@
 import React from 'react'
 import Vector from '../assets/Vector.svg'
+import { Link } from 'react-router-dom'
 
 const NavBar = () => {
   return (
@@ -20,8 +21,8 @@ const NavBar = () => {
         <li>
           <div>
             <ul className='flex gap-12 items-center'>
-              <li><button className='text-[#181D18] text-[18px] font-semibold '>Log In</button></li>
-              <li><button className='text-white py-[10px] px-[16px] bg-[#181D18] rounded-3xl text-[18px] font-semibold'>SignUp</button></li>
+              <Link to={'/login'}><button className='text-[#181D18] text-[18px] font-semibold '>Log In</button></Link >
+              <Link to={'/login'} ><button className='text-white py-[10px] px-[16px] bg-[#181D18] rounded-3xl text-[18px] font-semibold'>SignUp</button></Link >
             </ul>
           </div>
         </li>
