@@ -4,11 +4,13 @@ import style from "./style/home.module.css"
 import Dashboard from './dashboard'
 import IaCard from '../componenet/iaCard'
 import campanylog from "../assets/campanylogo.svg"
+import ProjectsPage from "./projectsPage"
+import PartnersPage from './partnersPage'
 const HomePage = () => {
-  const [dashboardClick,setDashboardCliked]=useState(true);
+  const [dashboardClick,setDashboardCliked]=useState(false);
   const [singoutClick,setSingoutclicked]=useState(false);
   const [individualClick,setIndividualclicked]=useState(false);
-  const [groupClick,setGroupclicked]=useState(false);
+  const [groupClick,setGroupclicked]=useState(true);
   const [documentationClick,setDocumentationclicked]=useState(false);
   const [statistiqueClick,setStatistiqueclicked]=useState(false);
   const [parameterClick,setParameterclicked]=useState(false);
@@ -79,10 +81,15 @@ const HomePage = () => {
   setParameterclicked(true); 
  }
  
+ 
   return (
     <div className={style.hero}>
      <NavigationBar dashboardCliked={dashboardClick} singoutonclick={handleSingoutonclick} singoutclicked={singoutClick} individualclicked={individualClick} groupclicked={groupClick} documentationclicked={documentationClick} statistiqueclicked={statistiqueClick} parameterclicked={parameterClick} dashboardonclick={handleDashboardonclick} individualonclick={handleIndividualonclick} documentationonclick ={handleDocumentationonclic} grouponclick={handleGrouponclick} statistiqueonclick={handleStatistiqueonclick} parameteronclick={handleParameteronclick} /> 
-  <Dashboard cliked={dashboardClick}/>
+     <Dashboard cliked={dashboardClick}/>
+     <ProjectsPage cliked={documentationClick}/>
+     <PartnersPage cliked={groupClick}/>
+
+
 
     
     </div>

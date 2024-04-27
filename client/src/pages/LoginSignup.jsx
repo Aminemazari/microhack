@@ -44,13 +44,15 @@ const LoginSignup = () => {
   return (
     <div className={`flex flex-col md:flex-row  min-h-screen w-full overflow-hidden ${showLogin ? 'bg-[#16DB65] transition duration-1000 ease-in-out' : 'bg-white'}`}>
       <div className={`flex-1 flex justify-center bg-[#16DB65] ${showLogin ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-500 ease-in-out`}>
-    
+     
       </div>
       <div className={`bg-white gap-10 w-full  md:w-1/2 flex flex-col items-center rounded-l-2xl ${showLogin ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-500 ease-in-out`}>
+        
         <div className='h-10 mt-10 flex items-center  md:gap-8'>
           <h3 className='text-black text-xl  '>Don't have an account?</h3>
           <button className='px-6 md:px-12 py-3 rounded-3xl ml-10 border border-[#797488] text-[#16DB65] hover:text-white hover:bg-[#16DB65] transition-colors duration-300' onClick={toggleView}>Sign Up</button>
         </div>
+        
         <div className='flex flex-col  md:w-1/2'>
           <h1 className='text-black font-bold text-3xl '>Welcome to OptiField</h1>
           <h3 className='text-black ml-1 text-xl'>Log in to your account</h3>
@@ -78,8 +80,8 @@ const LoginSignup = () => {
               <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
             </svg>Continue with Google</button>
         </div>
-      </div>
-
+      </div> 
+     //signup
       <div className={`bg-[#16DB65] ml-2 gap-10 w-full md:w-1/2 flex flex-col items-center ${showLogin ? 'md:translate-x-full' : 'md:translate-x-0'} transition-transform duration-500 ease-in-out`}>
         <div className='h-10 mt-10  flex items-center gap-8 '>
           <h3 className='text-white text-lg'>Already have an account ?</h3>
@@ -113,7 +115,7 @@ const LoginSignup = () => {
         </div>
       </div>
       <div className={`bg-white rounded-r-2xl flex-grow flex justify-center  h-full ${showLogin ? 'hidden' : ''}`}>
-    <img src="" alt="" />
+    
 
       {islogged && <Navigate to="/home" />}
       </div>
