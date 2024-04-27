@@ -28,6 +28,7 @@ builder.Services.AddAuthentication(cfg => {
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8
             .GetBytes(builder.Configuration["ApplicationSettings:JWT_Secret"]!)
+            // .GetBytes("dummy_secret_for_development_mode")
         ),
         ValidateIssuer = false,
         ValidateAudience = false,
@@ -39,8 +40,11 @@ builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddScoped<CompanyManager>();
 
 JwtService.SetJwtSecret(builder.Configuration["ApplicationSettings:JWT_Secret"]!);
+// JwtService.SetJwtSecret("dummy_secret_for_development_mode");
 
 var app = builder.Build();
+
+app.UseHsts();
 
 // Handmade Global logging
 app.Use((ctx,next)=>
@@ -91,3 +95,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

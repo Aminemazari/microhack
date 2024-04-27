@@ -3,4 +3,7 @@
 @tailwind utilities;
 *{
     color:white;
+    font-family:Roboto;
+
+
 }
