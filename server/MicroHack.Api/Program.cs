@@ -1,18 +1,49 @@
 using System.Text;
+using System.Text.Json;
+using Castle.Components.DictionaryAdapter.Xml;
 using MicroHack;
 using MicroHack.Domain;
 using MicroHack.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme. Enter 'Bearer' [space] and then your token in the text input below.",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+
+    
+});
 
 builder.Services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
 
@@ -26,9 +57,7 @@ builder.Services.AddAuthentication(cfg => {
     x.TokenValidationParameters = new TokenValidationParameters {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8
-            .GetBytes(builder.Configuration["ApplicationSettings:JWT_Secret"]!)
-            // .GetBytes("dummy_secret_for_development_mode")
+            Encoding.UTF8.GetBytes(builder.Configuration["ApplicationSettings:JWT_Secret"]!)
         ),
         ValidateIssuer = false,
         ValidateAudience = false,
@@ -36,11 +65,19 @@ builder.Services.AddAuthentication(cfg => {
     };
 });
 
-builder.Services.AddDbContext<AppDbContext>();
+// if(builder.Environment.IsProduction())
+    builder.Services.AddDbContext<AppDbContext>(o=>o.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
+// else
+    // builder.Services.AddDbContext<AppDbContext>(o=>o.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+
 builder.Services.AddScoped<CompanyManager>();
 
 JwtService.SetJwtSecret(builder.Configuration["ApplicationSettings:JWT_Secret"]!);
-// JwtService.SetJwtSecret("dummy_secret_for_development_mode");
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
 
 var app = builder.Build();
 
@@ -56,14 +93,12 @@ app.Use((ctx,next)=>
 
     var log = new RequestLog(
         ctx.Request.Path,
-        ctx?.User?.Identity?.Name,
+        ctx?.User?.Identity?.Name!,
         ctx?.Response.StatusCode,
         (end-start).TotalMilliseconds);
 
     Log.Information("{log}",log);
-
-   return task;
-
+    return task;
 });
 
 // Handmade Global Error Handling
@@ -96,4 +131,6 @@ app.MapControllers();
 
 app.Run();
 
+
+// This line is required for testing in MicroHack.Tests project, because by convention, this file content is inside the internal class Program, we can make it public class by defining other partiton of it as public, so it can be accessable from other assemblies
 public partial class Program { }

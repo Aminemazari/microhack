@@ -6,7 +6,7 @@ public enum UserRole
     Worker
 }
 
-public enum ProjectStatus
+public enum Status
 {
     Done = 1,
     InProgress,

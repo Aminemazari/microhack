@@ -78,12 +78,12 @@ public class ProjectFeatures(AppDbContext db) : ControllerBase
 
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetProject(string id)
+    public async Task<IActionResult> GetProject(Guid id)
     {
         var contract = await Db.Projects
             .Include(c => c.ClientCompany)
             .Include(c => c.ProviderCompany)
-            .FirstOrDefaultAsync(c => c.Id.ToString() == id);
+            .FirstOrDefaultAsync(c => c.Id == id);
 
         if (contract is null)
         {
@@ -125,17 +125,17 @@ public class ProjectFeatures(AppDbContext db) : ControllerBase
 
         if(provider_company is null || client_company is null) return NotFound(new Error("Provider or Client Company Not Found"));
 
-        var contract = new Project 
+        var project = new Project 
         (
             client_company,
             provider_company,
             contractDto.content
         );
         
-        Db.Projects.Add(contract);
+        Db.Projects.Add(project);
         await Db.SaveChangesAsync();
 
-        return Created("/api/contract", contract.Id.ToString());
+        return Created("/api/contract", new { Id = project.Id.ToString() });
     }
 
     // [Authorize]
