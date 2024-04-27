@@ -4,7 +4,7 @@ import style from "./style/home.module.css"
 import Dashboard from './dashboard'
 import IaCard from '../componenet/iaCard'
 import campanylog from "../assets/campanylogo.svg"
-const homePage = () => {
+const HomePage = () => {
   const [dashboardClick,setDashboardCliked]=useState(true);
   const [singoutClick,setSingoutclicked]=useState(false);
   const [individualClick,setIndividualclicked]=useState(false);
@@ -89,4 +89,4 @@ const homePage = () => {
   )
 }
 
-export default homePage
+export default HomePage
