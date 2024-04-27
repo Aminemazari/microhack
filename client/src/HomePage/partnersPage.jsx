@@ -24,13 +24,13 @@ import logoo from "../assets/Primery LOGO2.svg"
 import allthelogo from "../assets/allthelogo.svg"
 import IaCard from "../componenet/iaCard.jsx"
 import style from "./style/partnersPage.module.css"
-const partnersPage = ({clicked}) => {
+const partnersPage = ({cliked}) => {
   return (
-    <div className={`${styles.hero} ${clicked ? styles.not_display: ''}`}>
+    <div className={`${styles.hero} ${!cliked ? styles.not_display: ''}`}>
       
       <section className={styles.firstCountainer}>
         <img src={logoo} className={styles.logooImage}></img>
-        <div className={style.barCountainer}>
+        <div className={styles.barCountainer}>
           <img src={bar}></img>
           <TaskesBar taskStatus={"Task Queue"} taskTache={154}/>
           <TaskesBar taskStatus={"Finiched Tasks"} taskTache={254}/>
