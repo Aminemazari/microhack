@@ -10,13 +10,13 @@ public class AppDbContext : DbContext
     {
         Database.EnsureCreatedAsync().Wait();
     }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlite("Data Source=microhack.db");
-    }
     public DbSet<User> Users { get; set; }
     public DbSet<Company> Companies { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<Domain.Task> Tasks { get; set; }
+
+    protected AppDbContext()
+    {
+        
+    }
 }

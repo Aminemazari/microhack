@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using MicroHack.Domain;
 using MicroHack.Util;
@@ -59,15 +60,11 @@ public class AuthFeature(AppDbContext db) : ControllerBase
 
         if (user is null)
         {
-            System.Console.WriteLine("-----------> User Not Found");
             return NotFound(new Error("User Not Found"));
-        
         }
         if(! user.VerifyPassword(loginDto.Password))
         {
-            System.Console.WriteLine("-----------> Wrong Password");
             return BadRequest(new Error("Failed to login"));
-
         }
         var token = JwtService.GenerateJWTToken(user);
 
@@ -75,7 +72,7 @@ public class AuthFeature(AppDbContext db) : ControllerBase
     }
 
     public record TokenDto(string Token, UserDto User);
-    public record RegisterDto(string Email, string Password);
-    public record LoginDto(string Email, string Password);
+    public record RegisterDto([EmailAddress] string Email,[Length(4,20)] string Password);
+    public record LoginDto([EmailAddress] string Email,[Length(4,20)] string Password);
 
 }

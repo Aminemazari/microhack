@@ -14,5 +14,9 @@
     <PackageReference Include="Serilog" Version="3.1.1" />
     <PackageReference Include="Bogus" Version="35.5.0" />
     <PackageReference Include="ChatGPT.Net" Version="2.0.0" />
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
   </ItemGroup>
 </Project>

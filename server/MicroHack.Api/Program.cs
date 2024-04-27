@@ -1,13 +1,12 @@
-using System;
 using System.Text;
 using System.Text.Json;
-using ChatGPT.Net;
+using Castle.Components.DictionaryAdapter.Xml;
 using MicroHack;
 using MicroHack.Domain;
 using MicroHack.Util;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -66,11 +65,19 @@ builder.Services.AddAuthentication(cfg => {
     };
 });
 
-builder.Services.AddDbContext<AppDbContext>();
+// if(builder.Environment.IsProduction())
+    builder.Services.AddDbContext<AppDbContext>(o=>o.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
+// else
+    // builder.Services.AddDbContext<AppDbContext>(o=>o.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+
 builder.Services.AddScoped<CompanyManager>();
 
 JwtService.SetJwtSecret(builder.Configuration["ApplicationSettings:JWT_Secret"]!);
-// JwtService.SetJwtSecret("dummy_secret_for_development_mode");
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .CreateLogger();
+
 
 var app = builder.Build();
 
@@ -86,14 +93,12 @@ app.Use((ctx,next)=>
 
     var log = new RequestLog(
         ctx.Request.Path,
-        ctx?.User?.Identity?.Name,
+        ctx?.User?.Identity?.Name!,
         ctx?.Response.StatusCode,
         (end-start).TotalMilliseconds);
 
     Log.Information("{log}",log);
-
-   return task;
-
+    return task;
 });
 
 // Handmade Global Error Handling
@@ -124,35 +129,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// string apiKey = "fd2cd46f-5920-4388-ab45-4ff65bf4bf32";
-
-// app.MapPost("Chat-Completions",async ([FromBody] string message)=>
-// {
-    
-//     HttpClient client = new HttpClient();
-
-//     client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", apiKey);
-
-//     var payload = new PayLoad("Meta-Llama-3-8B-Instruct",new List<Message>(){new("user",message)});
-
-//     var payloadAsJson = JsonSerializer.Serialize(payload);
-
-//     HttpContent httpContent= new StringContent(payloadAsJson,Encoding.UTF8,"application/json");
-
-//     var result = await client.PostAsync("https://api.awanllm.com/v1/chat/completions",httpContent);
-
-//     return Results.Ok(result);
-// });
-
-// app.MapGet("ai", async () =>
-// {
-
-
-// });
-
 app.Run();
 
 
-public record PayLoad(string model, List<Message> messages);
-public record Message(string role, string content);
+// This line is required for testing in MicroHack.Tests project, because by convention, this file content is inside the internal class Program, we can make it public class by defining other partiton of it as public, so it can be accessable from other assemblies
 public partial class Program { }

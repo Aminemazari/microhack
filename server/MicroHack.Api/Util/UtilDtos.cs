@@ -5,7 +5,7 @@ namespace MicroHack.Util;
 
 public record class Error(string error);
 
-public record RequestLog(PathString path, string? name, int? statusCode, double totalMilliseconds);
+public record RequestLog(PathString Path, string Name, int? StatusCode, double TotalMilliseconds);
 
 public class Mapper
 {
@@ -18,8 +18,8 @@ public class Mapper
             Id = user.Id,
             Email = user.Email,
             Name = user.Name,
-            CompanyId = user.Company!.Id,
-            CompanyName = user.Company!.Name
+            CompanyId = user.Company?.Id,
+            CompanyName = user.Company?.Name
         };
     }
 
@@ -81,8 +81,8 @@ public class UserDto
     public Guid Id { get; set; }
     public string Email { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
-    public string CompanyName { get; set; } = string.Empty;
-    public Guid CompanyId { get; set; }
+    public string? CompanyName { get; set; } = string.Empty;
+    public Guid? CompanyId { get; set; }
 }
 
 
