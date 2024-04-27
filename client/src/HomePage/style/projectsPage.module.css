@@ -1,0 +1,113 @@
+.hero{
+    display: flex;
+    justify-content: space-between;
+    transition: all 500ms ease;
+  background: var(--M3-sys-light-surface, #F9F9F9);
+  
+  }
+  .not_display{
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    display: none;
+    transition:all 500ms ease; 
+}
+.filterHeader{
+  display: flex;
+  width: 70%;
+
+}
+.statusbutton{
+  display: flex;
+  padding: 0px;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+  flex: 1 0 0;
+  align-self: stretch;
+  border: 1px solid var(--M3-sys-light-outline, #797488);
+background-color: white;
+color: var(--M3-sys-light-on-surface, #1E1E1E);
+text-align: center;
+
+/* M3/label/large */
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.1px;
+}
+.statusbutton:hover{
+  background: var(--M3-sys-light-primary-container, #B7F1BA);
+}
+.statusButtonStart{
+  display: flex;
+  padding: 10px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+  flex: 1 0 0;
+  align-self: stretch;border-radius: 100px 0px 0px 100px;
+  border: 1px solid var(--M3-sys-light-outline, #797488);
+  background-color: white;
+  color: var(--M3-sys-light-on-surface, #1E1E1E);
+text-align: center;
+
+/* M3/label/large */
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.1px;
+}
+.statusButtonStart:hover{
+  background: var(--M3-sys-light-primary-container, #B7F1BA);
+}
+.statusbuttonEnd:hover{
+  background: var(--M3-sys-light-primary-container, #B7F1BA);
+}
+.statusbuttonEnd{
+  background-color: white;
+  display: flex;
+  padding: 10px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+  flex: 1 0 0;
+  align-self: stretch;
+  border-radius: 0px 100px 100px 0px;
+  border: 1px solid var(--M3-sys-light-outline, #797488);
+  color: var(--M3-sys-light-on-surface, #1E1E1E);
+text-align: center;
+
+/* M3/label/large */
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: 20px; /* 142.857% */
+letter-spacing: 0.1px;
+}
+.projects{
+  color: var(--M3-sys-light-on-surface, #1E1E1E);
+  /* M3/title/medium */
+  font-family: Montserrat;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 150% */
+  letter-spacing: 0.15px;
+}
+.projectsList{
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  overflow: auto;  
+  -webkit-scrollbar: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: 400px;
+}

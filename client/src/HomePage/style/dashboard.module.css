@@ -5,6 +5,7 @@
 background: var(--M3-sys-light-surface, #F9F9F9);
 }
 .not_display{
+  display: none;
     width: 0px;
     height: 0px;
     opacity: 0;
