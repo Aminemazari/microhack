@@ -116,7 +116,7 @@ const LoginSignup = () => {
       <div className={`bg-white rounded-r-2xl flex-grow flex justify-center  h-full ${showLogin ? 'hidden' : ''}`}>
     
 
-      {islogged && <Navigate to="/landingPage" />}
+      {islogged && <Navigate to="/home" />}
       </div>
     </div>
   );
