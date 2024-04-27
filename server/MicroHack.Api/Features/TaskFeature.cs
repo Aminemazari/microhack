@@ -105,6 +105,11 @@ public class TaskFeature(AppDbContext db, IConfiguration configuration) : Contro
 
             List<string>? l = JsonSerializer.Deserialize<List<string>>(newTasks) ?? throw new Exception("Failed to deserialize AI result to a list of tasks");
             
+            var tasks = l.Select(t => new Domain.Task(t, project)).ToList();
+
+            await Db.AddRangeAsync(tasks);
+            await Db.SaveChangesAsync();
+
             return Ok(l);
         }
         else

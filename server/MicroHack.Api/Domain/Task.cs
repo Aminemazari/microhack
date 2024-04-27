@@ -10,6 +10,7 @@ public class Task
     public Status Status { get; private set; }
     public List<User> Employees { get; private init; } = [];
 
+
     public Task(string content, Project project)
     {
         Id = Guid.NewGuid();
