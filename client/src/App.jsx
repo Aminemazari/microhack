@@ -8,6 +8,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/ia" element={<HomePage/>}/>
 
       </Routes>
     </BrowserRouter>

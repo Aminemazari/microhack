@@ -214,6 +214,45 @@ button {
     border-radius: 28px;
     background: var(--M3-sys-light-surface, #F1F1F1);
 }
+.form{
+    display: flex;
+    height: 40px;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+    align-self: stretch;
+}
+.formCountainer{
+    display: flex;
+    width: 200px;
+    align-items: center;
+    gap: 12px;
+
+
+}
+.nameCompany{
+    color: var(--M3-sys-light-on-background, var(--Schemes-On-Surface, #1C1A25));
+
+    /* M3/label/large */
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.1px;
+}
+.formService{
+    color: var(--M3-sys-light-on-background, var(--Schemes-On-Surface, #1C1A25));
+
+    /* M3/label/large */
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.1px;
+}
+
 .searchBar{
     display: flex;
     align-items: center;

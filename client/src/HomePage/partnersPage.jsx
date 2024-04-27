@@ -24,6 +24,13 @@ import logoo from "../assets/Primery LOGO2.svg"
 import allthelogo from "../assets/allthelogo.svg"
 import IaCard from "../componenet/iaCard.jsx"
 import style from "./style/partnersPage.module.css"
+import Partnerform from '../componenet/partnerform.jsx';
+import campany1 from "../assets/campany1.svg"
+import campany2 from "../assets/campany2.svg"
+import campany3 from "../assets/campany3.svg"
+import campany4 from "../assets/campany4.svg"
+import campany5 from "../assets/campany5.svg"
+
 const partnersPage = ({cliked}) => {
   return (
     <div className={`${styles.hero} ${!cliked ? styles.not_display: ''}`}>
@@ -39,15 +46,33 @@ const partnersPage = ({cliked}) => {
       </section>  
       <section className={styles.mainCountainer}>
          <nav className={styles.Header}>
-            <section className={styles.searchANDprofile}>
-              <SearchBar></SearchBar>
-               <mark className={styles.profileNotificationAndAccess}>
-                   <img src={notification}></img>
-                   <img src={allthelogo}/>
-               </mark>
+             <section className={styles.searchANDprofile}>
+                  <SearchBar></SearchBar>
+                    <mark className={styles.profileNotificationAndAccess}>
+                         <img src={notification}></img>
+                         <img src={allthelogo}/>
+                    </mark>
+             </section>
+        </nav>
+        <section className={style.listPartners}>
+                <div className={style.form}>
+                    <p className={style.company}>Company</p>
+                    <p className={style.company}>Details</p>
+                </div>
+                <section className={style.data}>
+                  <Partnerform campanyImage={logo} nameCompany={"Bolt & Gear"} service={"Industrial Services"} ></Partnerform>
+                  <Partnerform campanyImage={campany1} nameCompany={"Bolt & Gear"} service={"Production"} ></Partnerform>
+                  <Partnerform campanyImage={campany2} nameCompany={"Bolt & Gear"} service={""} ></Partnerform>
+                  <Partnerform campanyImage={campany3} nameCompany={"Bolt & Gear"} service={"Information T."} ></Partnerform>
+                  <Partnerform campanyImage={campany4} nameCompany={"Bolt & Gear"} service={"Energy"} ></Partnerform>
+                  <Partnerform campanyImage={campany5} nameCompany={"Bolt & Gear"} service={"Consumer Goods"} ></Partnerform>
+                 
+    
+
+                </section>
             </section>
-            </nav>
             </section>
+
             </div>
   )
 }

@@ -14,6 +14,7 @@ const homePage = () => {
   const [documentationClick,setDocumentationclicked]=useState(false);
   const [statistiqueClick,setStatistiqueclicked]=useState(false);
   const [parameterClick,setParameterclicked]=useState(false);
+  
   const handleSingoutonclick=()=>{
 
     setSingoutclicked(true);
