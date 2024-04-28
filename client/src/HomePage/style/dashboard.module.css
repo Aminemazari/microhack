@@ -1,0 +1,156 @@
+.hero{
+  display: flex;
+  justify-content: space-between;
+  transition: all 500ms ease;
+background: var(--M3-sys-light-surface, #F9F9F9);
+}
+.not_display{
+  display: none;
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    transition:all 500ms ease; 
+}
+.firstCountainer{
+  max-width: 300px;
+ padding-left: 2.4vw;
+ padding-top: 20px;
+ display: flex;
+ gap:10px;
+ align-items: center;
+ flex-direction: column ;
+}
+
+.dashboard{
+    color: #000;
+
+    /* M3/headline/medium */
+    font-family: Roboto;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 36px; /* 128.571% */
+}
+.barCountainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+}
+.mainCountainer{
+    display:flex; 
+    width: 66.92vw;
+    flex-direction: column;
+    gap:10px;
+    padding-left: 10px;
+}
+.Header{
+    display: flex;
+    width: 100%;
+    padding: 0px 16px 12px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 16px;
+    background: var(--Neutral-1, #FFF);
+}
+.filterHeader{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+    padding-top: 10px;
+    height: 70px;
+    gap:24px;
+}
+.buttonsection{
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+
+}
+.DateField{
+    display: flex;
+    gap:17px; 
+}
+.statusbutton{
+
+    color: var(--Neutral-9, #434343);
+    font-feature-settings: 'clig' off, 'liga' off;
+    
+    /* UI Type/text-md/[S] */
+    font-family: "DM Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 150% */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+    border:none;
+    background-color: #FFF;
+}
+.searchANDprofile{
+    display: flex;
+    width: 100%;
+    height: 88px;
+    justify-content: space-between;
+    align-items: center;
+}
+.profileNotificationAndAccess{
+    display: flex;
+    width: calc(249px / 100 * 1vw);
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    flex-shrink: 0;
+    background: var(--Neutral-1, #FFF);
+}
+.sameTextType{
+    color: var(--M3-sys-light-on-primary-fixed, #1E0060);
+
+    /* M3/label/large */
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: 0.1px; 
+}
+.heroCountainer{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+.tableOfEmployer{
+    width: 61.92vw;
+}
+.HeaderOfEmployer{
+    padding:  0px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    background: var(--M3-sys-light-surface-bright, #F7FBF2);
+    border-radius: 16px;
+}
+.employerCardes{
+    background-color: white;
+    width: 100%;
+    gap: 25px;
+    padding: 0px 48px;
+    padding-top:10px ;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;  
+    -webkit-scrollbar: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: 100vh;
+
+}
+
+
