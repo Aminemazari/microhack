@@ -1,6 +1,4 @@
 using System.Text;
-using System.Text.Json;
-using Castle.Components.DictionaryAdapter.Xml;
 using MicroHack;
 using MicroHack.Domain;
 using MicroHack.Util;
@@ -65,10 +63,10 @@ builder.Services.AddAuthentication(cfg => {
     };
 });
 
-// if(builder.Environment.IsProduction())
+if(builder.Environment.IsProduction())
+    builder.Services.AddDbContext<AppDbContext>(o=>o.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
+else
     builder.Services.AddDbContext<AppDbContext>(o=>o.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection")));
-// else
-    // builder.Services.AddDbContext<AppDbContext>(o=>o.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 
 builder.Services.AddScoped<CompanyManager>();
 

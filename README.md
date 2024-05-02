@@ -53,5 +53,24 @@ _Let client-company the company looking for the service, and provider-company th
  - Providing the access to the cross-company tasks info for all the employees acourding to spicific authorization (for example the security agent must know who will come to work and when, but other employees related to the issue should know more like which machine he need to fix, whitch zones he is allowed to be in ..., and other business constains)
  - The ability to monitoring & logging the system events, and orgnize the data in meningful & useful way for managers,
 
-#### Endpoints design : // Comming soon (or may be not :) )
+#### Project Architecture :
+ - Appling vertical slices architecture with minimal using of domain driven design that match with the nature of hackathon MVP and business intensive application (Task managment)
+
+#### Database & Deployment : 
+ - Using PostgreSQL as Production database and SQLite and development database to facilitate the development
+ - Postgres database depoloyed indenenently from the app, while deploying the app in fly.io using docker
+ - Obviously, for testing and fast changing development Sqlite is very good chouse since it is just a file in your project folder
+
+#### Logging & Error handling
+ - Log every api call, and perform global error handling to catch exeption, it is not secure but it can give you very fast feedback about where does things goes wrong so it is good for developement stage but not for production
+
+#### Documentation :
+ - Using SwaggerUI as documentation and manual testing tool that facilitate integrating between frontend and backend 
+
+#### Testing :
+ - Prefering Integration testing over unit testing because of the lean architecture of losly copled vertical slices and copled horizental layers (all the functionality that effect one thing should be as close as possible) so injecting mocks for unit testing is not usefull here, instead integration testing will give you enough to work but not to much to wast hackathon valuble time
+
+#### Endpoints design : Focus on the main & critical endpoints for the end user, which made it inti-conventional and hard to understand without suitibal docs (not only CRUD api)
+
+#### Integrating AI : using Awan LLM api to add facilitate extracting tasks from projects
 

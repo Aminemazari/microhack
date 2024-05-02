@@ -6,24 +6,18 @@ import IaCard from '../componenet/iaCard'
 import campanylog from "../assets/campanylogo.svg"
 import ProjectsPage from "./projectsPage"
 import PartnersPage from './partnersPage'
+import { useNavigate } from 'react-router-dom'
 const HomePage = () => {
-  const [dashboardClick,setDashboardCliked]=useState(false);
+  const [dashboardClick,setDashboardCliked]=useState(true);
   const [singoutClick,setSingoutclicked]=useState(false);
   const [individualClick,setIndividualclicked]=useState(false);
-  const [groupClick,setGroupclicked]=useState(true);
+  const [groupClick,setGroupclicked]=useState(false);
   const [documentationClick,setDocumentationclicked]=useState(false);
   const [statistiqueClick,setStatistiqueclicked]=useState(false);
   const [parameterClick,setParameterclicked]=useState(false);
-  
+  const Navigate = useNavigate("");
   const handleSingoutonclick=()=>{
-
-    setSingoutclicked(true);
-    setDashboardCliked(false);
-    setIndividualclicked(false);
-    setGroupclicked(false);
-    setDocumentationclicked(false);
-    setStatistiqueclicked(false);
-    setParameterclicked(false);
+       Navigate("/");
   }
   const handleDashboardonclick=()=>{
     setDashboardCliked(true); 

@@ -10,6 +10,8 @@ public partial class User
     public string HashedPassword { get; private set; } = string.Empty;
     public UserRole Role { get; private set; } = UserRole.Worker;
     public Company? Company { get; set; } = null;
+    public List<Task> Tasks { get; set; }
+
     protected User() {} // used by EF Core ORM for mapping
 
     public User(string Email, string Password)

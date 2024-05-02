@@ -62,7 +62,6 @@ const partnersPage = ({cliked}) => {
                 <section className={style.data}>
                   <Partnerform campanyImage={logo} nameCompany={"Bolt & Gear"} service={"Industrial Services"} ></Partnerform>
                   <Partnerform campanyImage={campany1} nameCompany={"Bolt & Gear"} service={"Production"} ></Partnerform>
-                  <Partnerform campanyImage={campany2} nameCompany={"Bolt & Gear"} service={""} ></Partnerform>
                   <Partnerform campanyImage={campany3} nameCompany={"Bolt & Gear"} service={"Information T."} ></Partnerform>
                   <Partnerform campanyImage={campany4} nameCompany={"Bolt & Gear"} service={"Energy"} ></Partnerform>
                   <Partnerform campanyImage={campany5} nameCompany={"Bolt & Gear"} service={"Consumer Goods"} ></Partnerform>
